@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { RefreshToken } from './auth/refresh-token.entity';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -18,7 +19,7 @@ import { HealthController } from './health.controller';
         username: cfg.get<string>('DB_USER', 'schoolflow'),
         password: cfg.getOrThrow<string>('DB_PASSWORD'),
         database: cfg.get<string>('DB_NAME', 'schoolflow'),
-        entities: [User],
+        entities: [User, RefreshToken],
         // Premier jalon : le schéma est créé automatiquement. À remplacer par des migrations
         // dès que le modèle (élèves, classes…) sera en place.
         synchronize: cfg.get('DB_SYNC', 'true') === 'true',

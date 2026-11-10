@@ -7,6 +7,7 @@ COPY package*.json ./
 RUN npm ci
 COPY tsconfig.json next.config.ts ./
 COPY app ./app
+COPY lib ./lib
 RUN mkdir -p public && npm run build
 
 FROM node:22-alpine
